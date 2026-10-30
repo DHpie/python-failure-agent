@@ -1,0 +1,36 @@
+{
+  "RUN-001": {
+    "execution_id": "RUN-001",
+    "case_id": "CASE-001",
+    "operation_id": "calculateOrder",
+    "request": {
+      "method": "POST",
+      "path": "/orders/calculate",
+      "body": {"amount": 100, "discount": 120}
+    },
+    "expected": {
+      "status": 400,
+      "body_assertions": [{"path": "$.code", "operator": "equals", "value": "INVALID_DISCOUNT"}]
+    },
+    "actual": {"status": 200, "body": {"payable": -20}},
+    "transport_error": null,
+    "failure_kind": "ASSERTION_FAILURE"
+  },
+  "RUN-002": {
+    "execution_id": "RUN-002",
+    "case_id": "CASE-002",
+    "operation_id": "calculateOrder",
+    "request": {
+      "method": "POST",
+      "path": "/orders/calculate",
+      "body": {"amount": 100, "discount": 20}
+    },
+    "expected": {
+      "status": 200,
+      "body_assertions": [{"path": "$.payable", "operator": "equals", "value": 80}]
+    },
+    "actual": null,
+    "transport_error": {"type": "CONNECT_TIMEOUT", "message": "连接在3000ms内未建立"},
+    "failure_kind": "TRANSPORT_ERROR"
+  }
+}

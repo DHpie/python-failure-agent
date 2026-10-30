@@ -1,0 +1,10 @@
+{
+  "calculateOrder": [
+    {"evidence_id": "RULE-001", "text": "优惠金额不能小于0，也不能超过订单金额。"},
+    {"evidence_id": "RULE-002", "text": "非法优惠返回HTTP 400，响应字段code为INVALID_DISCOUNT。"}
+  ],
+  "getOrder": [
+    {"evidence_id": "RULE-003", "text": "查询不存在的订单时返回HTTP 404。"}
+  ],
+  "healthCheck": []
+}
