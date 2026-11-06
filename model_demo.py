@@ -46,6 +46,7 @@ def main() -> int:
     parser.add_argument("--execution-id", default="RUN-001")
     parser.add_argument("--dry-run", action="store_true", help="只显示消息，不读取模型配置，不发请求")
     args = parser.parse_args()
+    # breakpoint()
     try:
         messages = build_messages(args.execution_id)
         if args.dry_run:

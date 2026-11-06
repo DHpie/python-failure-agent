@@ -1,6 +1,18 @@
-# 失败分析 Agent：第1步，离线数据与工具
+# 失败分析学习示例
 
-当前版本只有**读取证据**的能力，没有模型、Agent、自动诊断或被测接口调用。两个工具就是普通 Python 函数。你可以先看见输入和返回值，再理解后续模型如何调用它们。
+项目现已包含三步，三个入口分别保留，可独立运行。
+
+- 第1步：本文下方及 [逐段讲解](docs/walkthrough.md)。
+- 第2步：[模型配置、消息与单次调用讲解](docs/step2-model-messages.md)。从 `--dry-run` 开始，不需要密钥。
+- 第3步：[Agent消息循环、工具选择与验证](docs/step3-agent-tools.md)。先运行 `agent_demo.py --offline` 观察循环，再连接真实模型。
+
+新增文件：`model_config.py`（配置和客户端）、`model_demo.py`（消息和调用入口）、`.env.example`（配置模板）、`requirements.txt`（模型运行依赖）、`tests/test_model_demo.py`（离线测试）。
+
+第3步新增：`agent_tools.py`（工具注册包装）、`agent_demo.py`（Agent与轨迹入口）、`scripted_model.py`（离线预设模型）、`tests/test_agent_demo.py`（真实框架循环的离线测试）。第三步还未接入结构化最终输出或业务质量验收。
+
+## 第1步：离线数据与工具
+
+第一步只有**读取证据**的能力，没有模型、Agent、自动诊断或被测接口调用。两个工具就是普通 Python 函数。你可以先看见输入和返回值，再理解后续模型如何调用它们。
 
 运行代码仅依赖 Python 标准库；测试额外依赖 pytest。建议 Python 3.11 或更高。所有记录都是人工构造的教学样本，不含真实业务数据或密钥。
 
@@ -15,7 +27,7 @@ python-failure-agent/
 │   └── rules.json             # 按 operation_id 组织的接口规则
 ├── tests/test_tools.py        # 查询、异常、路径和结果独立性测试
 ├── docs/walkthrough.md        # 逐段代码与测试讲解
-├── requirements-dev.txt       # 只声明测试依赖
+├── requirements-dev.txt       # 测试依赖，包含requirements.txt
 ├── pytest.ini                 # 测试目录、模块搜索路径
 └── .gitignore                 # 排除本地虚拟环境和缓存
 ```

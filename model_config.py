@@ -50,6 +50,6 @@ def build_model(settings: ModelSettings) -> ChatOpenAI:
         api_key=settings.api_key,
         base_url=settings.base_url,
         timeout=settings.timeout,
-        max_retries=0,
+        max_retries=2,
         use_responses_api=False,
     )
